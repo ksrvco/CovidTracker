@@ -1,0 +1,575 @@
+#!/bin/bash
+# Project Name : CovidTracker - Corona Virus Tracker
+# Version : 1.0
+# Coded by : KsrvcO
+# Tested on : Debian Based Linux Operation Systems
+# Video Demo : https://www.youtube.com/watch?v=PzxknOnRSE8
+# Contact Me : flower.k2000[at]gmail.com
+reset
+function logo() {
+echo -e '
+ ▄████████  ▄██████▄   ▄█    █▄   ▄█  ████████▄      ███        ▄████████    ▄████████  ▄████████    ▄█   ▄█▄    ▄████████    ▄████████ 
+███    ███ ███    ███ ███    ███ ███  ███   ▀███ ▀█████████▄   ███    ███   ███    ███ ███    ███   ███ ▄███▀   ███    ███   ███    ███ 
+███    █▀  ███    ███ ███    ███ ███▌ ███    ███    ▀███▀▀██   ███    ███   ███    ███ ███    █▀    ███▐██▀     ███    █▀    ███    ███ 
+███        ███    ███ ███    ███ ███▌ ███    ███     ███   ▀  ▄███▄▄▄▄██▀   ███    ███ ███         ▄█████▀     ▄███▄▄▄      ▄███▄▄▄▄██▀ 
+███        ███    ███ ███    ███ ███▌ ███    ███     ███     ▀▀███▀▀▀▀▀   ▀███████████ ███        ▀▀█████▄    ▀▀███▀▀▀     ▀▀███▀▀▀▀▀   
+███    █▄  ███    ███ ███    ███ ███  ███    ███     ███     ▀███████████   ███    ███ ███    █▄    ███▐██▄     ███    █▄  ▀███████████ 
+███    ███ ███    ███ ███    ███ ███  ███   ▄███     ███       ███    ███   ███    ███ ███    ███   ███ ▀███▄   ███    ███   ███    ███ 
+████████▀   ▀██████▀   ▀██████▀  █▀   ████████▀     ▄████▀     ███    ███   ███    █▀  ████████▀    ███   ▀█▀   ██████████   ███    ███ 
+                                                               ███    ███                           ▀                        ███    ███ 
+'
+}
+logo
+echo ""
+echo " [+] Project name : CovidTracker - Corona Virus Tracker"
+echo " [+] Coded by : KsrvcO"
+echo " [+] Version : 1.0"
+echo " [+] Contact Me : flower.k2000[at]gmail.com"
+echo ""
+echo ""
+echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
+echo "  L i s t   o f   C o u n t r i e s"
+echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
+echo ""
+echo -e '
+1. China                10. USA                19. Germany                28. France 
+2. S.Korea              11. Netherlands        20. Iran                   29. Brazil
+3. Sweden               12. Canada             21. Belgium               +30. Updating...
+4. Ireland              13. poland             22. Philippines      
+5. Algeria              14. Denmark            23. Hong Kong
+6. Italy                15. Greece             24. Iraq
+7. Switzerland          16. Spain              25. Portugal
+8. UK                   17. Australia          26. Austria
+9. Canada               18. Indonesia          27. Norway
+'
+echo ""
+read -p "[+] Select the country number for get statistics : " country
+rm -rf /tmp/coronavirus/
+mkdir /tmp/coronavirus/
+if [ $country == "1" ]
+    then
+        echo ""
+        curl --silent "https://www.worldometers.info/coronavirus/country/china/" > /tmp/coronavirus/a.html
+        corona_cases=$(grep -E '<span style="color:#aaa">' /tmp/coronavirus/a.html | cut -d ">" -f 2 | cut -d "<" -f 1)
+        died_corona=$(grep -n -m 1 -E "<span>.*</span>$" /tmp/coronavirus/a.html | cut -d "<" -f 2 | cut -d ">" -f2)
+        recovered_corona=$(grep -n -m 2 -E "<span>.*</span>$" /tmp/coronavirus/a.html | cut -d "<" -f 2 | cut -d ">" -f2 | awk '{if(NR==2) print $0}')
+        echo "=-=-=-=-=-=-=-=-=-=-=-=-=-="
+        echo " Result of China Country"
+        echo "=-=-=-=-=-=-=-=-=-=-=-=-=-="
+        echo ""
+        echo "[-] Number of Corona cases of China are: $corona_cases"
+        echo "[-] Number of Died cases of China are: $died_corona"
+        echo "[-] Number of Recovered cases of China are: $recovered_corona"
+        echo ""
+        rm -rf /tmp/coronavirus/
+        sleep 5
+        exit
+elif [ $country == "2" ]
+    then
+        echo ""
+        curl --silent "https://www.worldometers.info/coronavirus/country/south-korea/" > /tmp/coronavirus/a.html
+        corona_cases=$(grep -E '<span style="color:#aaa">' /tmp/coronavirus/a.html | cut -d ">" -f 2 | cut -d "<" -f 1)
+        died_corona=$(grep -n -m 1 -E "<span>.*</span>$" /tmp/coronavirus/a.html | cut -d "<" -f 2 | cut -d ">" -f2)
+        recovered_corona=$(grep -n -m 2 -E "<span>.*</span>$" /tmp/coronavirus/a.html | cut -d "<" -f 2 | cut -d ">" -f2 | awk '{if(NR==2) print $0}')
+        echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
+        echo " Result of South Korea Country"
+        echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
+        echo ""
+        echo "[-] Number of Corona cases of South Korea are: $corona_cases"
+        echo "[-] Number of Died cases of South Korea are: $died_corona"
+        echo "[-] Number of Recovered cases of South Korea are: $recovered_corona"
+        echo ""
+        rm -rf /tmp/coronavirus/
+        sleep 5
+        exit    
+elif [ $country == "3" ]
+    then
+        echo ""
+        curl --silent "https://www.worldometers.info/coronavirus/country/sweden/" > /tmp/coronavirus/a.html
+        corona_cases=$(grep -E '<span style="color:#aaa">' /tmp/coronavirus/a.html | cut -d ">" -f 2 | cut -d "<" -f 1)
+        died_corona=$(grep -n -m 1 -E "<span>.*</span>$" /tmp/coronavirus/a.html | cut -d "<" -f 2 | cut -d ">" -f2)
+        recovered_corona=$(grep -n -m 2 -E "<span>.*</span>$" /tmp/coronavirus/a.html | cut -d "<" -f 2 | cut -d ">" -f2 | awk '{if(NR==2) print $0}')
+        echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
+        echo " Result of Sweden Country"
+        echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
+        echo ""
+        echo "[-] Number of Corona cases of Sweden are: $corona_cases"
+        echo "[-] Number of Died cases of Sweden are: $died_corona"
+        echo "[-] Number of Recovered cases of Sweden are: $recovered_corona"
+        echo ""
+        rm -rf /tmp/coronavirus/
+        sleep 5
+        exit
+elif [ $country == "4" ]
+    then
+        echo ""
+        curl --silent "https://www.worldometers.info/coronavirus/country/ireland/" > /tmp/coronavirus/a.html
+        corona_cases=$(grep -E '<span style="color:#aaa">' /tmp/coronavirus/a.html | cut -d ">" -f 2 | cut -d "<" -f 1)
+        died_corona=$(grep -n -m 1 -E "<span>.*</span>$" /tmp/coronavirus/a.html | cut -d "<" -f 2 | cut -d ">" -f2)
+        recovered_corona=$(grep -n -m 2 -E "<span>.*</span>$" /tmp/coronavirus/a.html | cut -d "<" -f 2 | cut -d ">" -f2 | awk '{if(NR==2) print $0}')
+        echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
+        echo " Result of Ireland Country"
+        echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
+        echo ""
+        echo "[-] Number of Corona cases of Ireland are: $corona_cases"
+        echo "[-] Number of Died cases of Ireland are: $died_corona"
+        echo "[-] Number of Recovered cases of Ireland are: $recovered_corona"
+        echo ""
+        rm -rf /tmp/coronavirus/
+        sleep 5
+        exit
+elif [ $country == "5" ]
+    then
+        echo ""
+        curl --silent "https://www.worldometers.info/coronavirus/country/algeria/" > /tmp/coronavirus/a.html
+        corona_cases=$(grep -E '<span style="color:#aaa">' /tmp/coronavirus/a.html | cut -d ">" -f 2 | cut -d "<" -f 1)
+        died_corona=$(grep -n -m 1 -E "<span>.*</span>$" /tmp/coronavirus/a.html | cut -d "<" -f 2 | cut -d ">" -f2)
+        recovered_corona=$(grep -n -m 2 -E "<span>.*</span>$" /tmp/coronavirus/a.html | cut -d "<" -f 2 | cut -d ">" -f2 | awk '{if(NR==2) print $0}')
+        echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
+        echo " Result of Algeria Country"
+        echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
+        echo ""
+        echo "[-] Number of Corona cases of Algeria are: $corona_cases"
+        echo "[-] Number of Died cases of Algeria are: $died_corona"
+        echo "[-] Number of Recovered cases of Algeria are: $recovered_corona"
+        echo ""
+        rm -rf /tmp/coronavirus/
+        sleep 5
+        exit
+elif [ $country == "6" ]
+    then
+        echo ""
+        curl --silent "https://www.worldometers.info/coronavirus/country/italy/" > /tmp/coronavirus/a.html
+        corona_cases=$(grep -E '<span style="color:#aaa">' /tmp/coronavirus/a.html | cut -d ">" -f 2 | cut -d "<" -f 1)
+        died_corona=$(grep -n -m 1 -E "<span>.*</span>$" /tmp/coronavirus/a.html | cut -d "<" -f 2 | cut -d ">" -f2)
+        recovered_corona=$(grep -n -m 2 -E "<span>.*</span>$" /tmp/coronavirus/a.html | cut -d "<" -f 2 | cut -d ">" -f2 | awk '{if(NR==2) print $0}')
+        echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
+        echo " Result of Italy Country"
+        echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
+        echo ""
+        echo "[-] Number of Corona cases of Italy are: $corona_cases"
+        echo "[-] Number of Died cases of Italy are: $died_corona"
+        echo "[-] Number of Recovered cases of Italy are: $recovered_corona"
+        echo ""
+        rm -rf /tmp/coronavirus/
+        sleep 5
+        exit
+elif [ $country == "7" ]
+    then
+        echo ""
+        curl --silent "https://www.worldometers.info/coronavirus/country/switzerland/" > /tmp/coronavirus/a.html
+        corona_cases=$(grep -E '<span style="color:#aaa">' /tmp/coronavirus/a.html | cut -d ">" -f 2 | cut -d "<" -f 1)
+        died_corona=$(grep -n -m 1 -E "<span>.*</span>$" /tmp/coronavirus/a.html | cut -d "<" -f 2 | cut -d ">" -f2)
+        recovered_corona=$(grep -n -m 2 -E "<span>.*</span>$" /tmp/coronavirus/a.html | cut -d "<" -f 2 | cut -d ">" -f2 | awk '{if(NR==2) print $0}')
+        echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
+        echo " Result of Switzerland Country"
+        echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
+        echo ""
+        echo "[-] Number of Corona cases of Switzerland are: $corona_cases"
+        echo "[-] Number of Died cases of Switzerland are: $died_corona"
+        echo "[-] Number of Recovered cases of Switzerland are: $recovered_corona"
+        echo ""
+        rm -rf /tmp/coronavirus/
+        sleep 5
+        exit
+elif [ $country == "8" ]
+    then
+        echo ""
+        curl --silent "https://www.worldometers.info/coronavirus/country/uk/" > /tmp/coronavirus/a.html
+        corona_cases=$(grep -E '<span style="color:#aaa">' /tmp/coronavirus/a.html | cut -d ">" -f 2 | cut -d "<" -f 1)
+        died_corona=$(grep -n -m 1 -E "<span>.*</span>$" /tmp/coronavirus/a.html | cut -d "<" -f 2 | cut -d ">" -f2)
+        recovered_corona=$(grep -n -m 2 -E "<span>.*</span>$" /tmp/coronavirus/a.html | cut -d "<" -f 2 | cut -d ">" -f2 | awk '{if(NR==2) print $0}')
+        echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
+        echo " Result of United Kingdom Country"
+        echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
+        echo ""
+        echo "[-] Number of Corona cases of United Kingdom are: $corona_cases"
+        echo "[-] Number of Died cases of United Kingdom are: $died_corona"
+        echo "[-] Number of Recovered cases of United Kingdom are: $recovered_corona"
+        echo ""
+        rm -rf /tmp/coronavirus/
+        sleep 5
+        exit
+elif [ $country == "9" ]
+    then
+        echo ""
+        curl --silent "https://www.worldometers.info/coronavirus/country/canada/" > /tmp/coronavirus/a.html
+        corona_cases=$(grep -E '<span style="color:#aaa">' /tmp/coronavirus/a.html | cut -d ">" -f 2 | cut -d "<" -f 1)
+        died_corona=$(grep -n -m 1 -E "<span>.*</span>$" /tmp/coronavirus/a.html | cut -d "<" -f 2 | cut -d ">" -f2)
+        recovered_corona=$(grep -n -m 2 -E "<span>.*</span>$" /tmp/coronavirus/a.html | cut -d "<" -f 2 | cut -d ">" -f2 | awk '{if(NR==2) print $0}')
+        echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
+        echo " Result of Canada Country"
+        echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
+        echo ""
+        echo "[-] Number of Corona cases of Canada are: $corona_cases"
+        echo "[-] Number of Died cases of Canada are: $died_corona"
+        echo "[-] Number of Recovered cases of Canada are: $recovered_corona"
+        echo ""
+        rm -rf /tmp/coronavirus/
+        sleep 5
+        exit
+elif [ $country == "10" ]
+    then
+        echo ""
+        curl --silent "https://www.worldometers.info/coronavirus/country/us/" > /tmp/coronavirus/a.html
+        corona_cases=$(grep -E '<span style="color:#aaa">' /tmp/coronavirus/a.html | cut -d ">" -f 2 | cut -d "<" -f 1)
+        died_corona=$(grep -n -m 1 -E "<span>.*</span>$" /tmp/coronavirus/a.html | cut -d "<" -f 2 | cut -d ">" -f2)
+        recovered_corona=$(grep -n -m 2 -E "<span>.*</span>$" /tmp/coronavirus/a.html | cut -d "<" -f 2 | cut -d ">" -f2 | awk '{if(NR==2) print $0}')
+        echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
+        echo " Result of United States Country"
+        echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
+        echo ""
+        echo "[-] Number of Corona cases of United States are: $corona_cases"
+        echo "[-] Number of Died cases of United States are: $died_corona"
+        echo "[-] Number of Recovered cases of country are: $recovered_corona"
+        echo ""
+        rm -rf /tmp/coronavirus/
+        sleep 5
+        exit
+elif [ $country == "11" ]
+    then
+        echo ""
+        curl --silent "https://www.worldometers.info/coronavirus/country/netherlands/" > /tmp/coronavirus/a.html
+        corona_cases=$(grep -E '<span style="color:#aaa">' /tmp/coronavirus/a.html | cut -d ">" -f 2 | cut -d "<" -f 1)
+        died_corona=$(grep -n -m 1 -E "<span>.*</span>$" /tmp/coronavirus/a.html | cut -d "<" -f 2 | cut -d ">" -f2)
+        recovered_corona=$(grep -n -m 2 -E "<span>.*</span>$" /tmp/coronavirus/a.html | cut -d "<" -f 2 | cut -d ">" -f2 | awk '{if(NR==2) print $0}')
+        echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
+        echo " Result of Netherlands Country"
+        echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
+        echo ""
+        echo "[-] Number of Corona cases of Netherlands are: $corona_cases"
+        echo "[-] Number of Died cases of Netherlands are: $died_corona"
+        echo "[-] Number of Recovered cases of Netherlands are: $recovered_corona"
+        echo ""
+        rm -rf /tmp/coronavirus/
+        sleep 5
+        exit
+elif [ $country == "12" ]
+    then
+        echo ""
+        curl --silent "https://www.worldometers.info/coronavirus/country/netherlands/" > /tmp/coronavirus/a.html
+        corona_cases=$(grep -E '<span style="color:#aaa">' /tmp/coronavirus/a.html | cut -d ">" -f 2 | cut -d "<" -f 1)
+        died_corona=$(grep -n -m 1 -E "<span>.*</span>$" /tmp/coronavirus/a.html | cut -d "<" -f 2 | cut -d ">" -f2)
+        recovered_corona=$(grep -n -m 2 -E "<span>.*</span>$" /tmp/coronavirus/a.html | cut -d "<" -f 2 | cut -d ">" -f2 | awk '{if(NR==2) print $0}')
+        echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
+        echo " Result of Netherlands Country"
+        echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
+        echo ""
+        echo "[-] Number of Corona cases of Netherlands are: $corona_cases"
+        echo "[-] Number of Died cases of Netherlands are: $died_corona"
+        echo "[-] Number of Recovered cases of Netherlands are: $recovered_corona"
+        echo ""
+        rm -rf /tmp/coronavirus/
+        sleep 5
+        exit
+elif [ $country == "13" ]
+    then
+        echo ""
+        curl --silent "https://www.worldometers.info/coronavirus/country/poland/" > /tmp/coronavirus/a.html
+        corona_cases=$(grep -E '<span style="color:#aaa">' /tmp/coronavirus/a.html | cut -d ">" -f 2 | cut -d "<" -f 1)
+        died_corona=$(grep -n -m 1 -E "<span>.*</span>$" /tmp/coronavirus/a.html | cut -d "<" -f 2 | cut -d ">" -f2)
+        recovered_corona=$(grep -n -m 2 -E "<span>.*</span>$" /tmp/coronavirus/a.html | cut -d "<" -f 2 | cut -d ">" -f2 | awk '{if(NR==2) print $0}')
+        echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
+        echo " Result of Poland Country"
+        echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
+        echo ""
+        echo "[-] Number of Corona cases of Poland are: $corona_cases"
+        echo "[-] Number of Died cases of Poland are: $died_corona"
+        echo "[-] Number of Recovered cases of Poland are: $recovered_corona"
+        echo ""
+        rm -rf /tmp/coronavirus/
+        sleep 5
+        exit
+elif [ $country == "14" ]
+    then
+        echo ""
+        curl --silent "https://www.worldometers.info/coronavirus/country/denmark/" > /tmp/coronavirus/a.html
+        corona_cases=$(grep -E '<span style="color:#aaa">' /tmp/coronavirus/a.html | cut -d ">" -f 2 | cut -d "<" -f 1)
+        died_corona=$(grep -n -m 1 -E "<span>.*</span>$" /tmp/coronavirus/a.html | cut -d "<" -f 2 | cut -d ">" -f2)
+        recovered_corona=$(grep -n -m 2 -E "<span>.*</span>$" /tmp/coronavirus/a.html | cut -d "<" -f 2 | cut -d ">" -f2 | awk '{if(NR==2) print $0}')
+        echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
+        echo " Result of Denmark Country"
+        echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
+        echo ""
+        echo "[-] Number of Corona cases of Denmark are: $corona_cases"
+        echo "[-] Number of Died cases of Denmark are: $died_corona"
+        echo "[-] Number of Recovered cases of Denmark are: $recovered_corona"
+        echo ""
+        rm -rf /tmp/coronavirus/
+        sleep 5
+        exit
+elif [ $country == "15" ]
+    then
+        echo ""
+        curl --silent "https://www.worldometers.info/coronavirus/country/greece/" > /tmp/coronavirus/a.html
+        corona_cases=$(grep -E '<span style="color:#aaa">' /tmp/coronavirus/a.html | cut -d ">" -f 2 | cut -d "<" -f 1)
+        died_corona=$(grep -n -m 1 -E "<span>.*</span>$" /tmp/coronavirus/a.html | cut -d "<" -f 2 | cut -d ">" -f2)
+        recovered_corona=$(grep -n -m 2 -E "<span>.*</span>$" /tmp/coronavirus/a.html | cut -d "<" -f 2 | cut -d ">" -f2 | awk '{if(NR==2) print $0}')
+        echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
+        echo " Result of Greece Country"
+        echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
+        echo ""
+        echo "[-] Number of Corona cases of Greece are: $corona_cases"
+        echo "[-] Number of Died cases of Greece are: $died_corona"
+        echo "[-] Number of Recovered cases of Greece are: $recovered_corona"
+        echo ""
+        rm -rf /tmp/coronavirus/
+        sleep 5
+        exit
+elif [ $country == "16" ]
+    then
+        echo ""
+        curl --silent "https://www.worldometers.info/coronavirus/country/spain/" > /tmp/coronavirus/a.html
+        corona_cases=$(grep -E '<span style="color:#aaa">' /tmp/coronavirus/a.html | cut -d ">" -f 2 | cut -d "<" -f 1)
+        died_corona=$(grep -n -m 1 -E "<span>.*</span>$" /tmp/coronavirus/a.html | cut -d "<" -f 2 | cut -d ">" -f2)
+        recovered_corona=$(grep -n -m 2 -E "<span>.*</span>$" /tmp/coronavirus/a.html | cut -d "<" -f 2 | cut -d ">" -f2 | awk '{if(NR==2) print $0}')
+        echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
+        echo " Result of Spain Country"
+        echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
+        echo ""
+        echo "[-] Number of Corona cases of Spain are: $corona_cases"
+        echo "[-] Number of Died cases of Spain are: $died_corona"
+        echo "[-] Number of Recovered cases of Spain are: $recovered_corona"
+        echo ""
+        rm -rf /tmp/coronavirus/
+        sleep 5
+        exit
+elif [ $country == "17" ]
+    then
+        echo ""
+        curl --silent "https://www.worldometers.info/coronavirus/country/australia/" > /tmp/coronavirus/a.html
+        corona_cases=$(grep -E '<span style="color:#aaa">' /tmp/coronavirus/a.html | cut -d ">" -f 2 | cut -d "<" -f 1)
+        died_corona=$(grep -n -m 1 -E "<span>.*</span>$" /tmp/coronavirus/a.html | cut -d "<" -f 2 | cut -d ">" -f2)
+        recovered_corona=$(grep -n -m 2 -E "<span>.*</span>$" /tmp/coronavirus/a.html | cut -d "<" -f 2 | cut -d ">" -f2 | awk '{if(NR==2) print $0}')
+        echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
+        echo " Result of Australia Country"
+        echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
+        echo ""
+        echo "[-] Number of Corona cases of Australia are: $corona_cases"
+        echo "[-] Number of Died cases of Australia are: $died_corona"
+        echo "[-] Number of Recovered cases of Australia are: $recovered_corona"
+        echo ""
+        rm -rf /tmp/coronavirus/
+        sleep 5
+        exit
+elif [ $country == "18" ]
+    then
+        echo ""
+        curl --silent "https://www.worldometers.info/coronavirus/country/indonesia/" > /tmp/coronavirus/a.html
+        corona_cases=$(grep -E '<span style="color:#aaa">' /tmp/coronavirus/a.html | cut -d ">" -f 2 | cut -d "<" -f 1)
+        died_corona=$(grep -n -m 1 -E "<span>.*</span>$" /tmp/coronavirus/a.html | cut -d "<" -f 2 | cut -d ">" -f2)
+        recovered_corona=$(grep -n -m 2 -E "<span>.*</span>$" /tmp/coronavirus/a.html | cut -d "<" -f 2 | cut -d ">" -f2 | awk '{if(NR==2) print $0}')
+        echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
+        echo " Result of Indonesia Country"
+        echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
+        echo ""
+        echo "[-] Number of Corona cases of Indonesia are: $corona_cases"
+        echo "[-] Number of Died cases of Indonesia are: $died_corona"
+        echo "[-] Number of Recovered cases of Indonesia are: $recovered_corona"
+        echo ""
+        rm -rf /tmp/coronavirus/
+        sleep 5
+        exit
+elif [ $country == "19" ]
+    then
+        echo ""
+        curl --silent "https://www.worldometers.info/coronavirus/country/germany/" > /tmp/coronavirus/a.html
+        corona_cases=$(grep -E '<span style="color:#aaa">' /tmp/coronavirus/a.html | cut -d ">" -f 2 | cut -d "<" -f 1)
+        died_corona=$(grep -n -m 1 -E "<span>.*</span>$" /tmp/coronavirus/a.html | cut -d "<" -f 2 | cut -d ">" -f2)
+        recovered_corona=$(grep -n -m 2 -E "<span>.*</span>$" /tmp/coronavirus/a.html | cut -d "<" -f 2 | cut -d ">" -f2 | awk '{if(NR==2) print $0}')
+        echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
+        echo " Result of Germany Country"
+        echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
+        echo ""
+        echo "[-] Number of Corona cases of Germany are: $corona_cases"
+        echo "[-] Number of Died cases of Germany are: $died_corona"
+        echo "[-] Number of Recovered cases of Germany are: $recovered_corona"
+        echo ""
+        rm -rf /tmp/coronavirus/
+        sleep 5
+        exit
+elif [ $country == "20" ]
+    then
+        echo ""
+        curl --silent "https://www.worldometers.info/coronavirus/country/iran/" > /tmp/coronavirus/a.html
+        corona_cases=$(grep -E '<span style="color:#aaa">' /tmp/coronavirus/a.html | cut -d ">" -f 2 | cut -d "<" -f 1)
+        died_corona=$(grep -n -m 1 -E "<span>.*</span>$" /tmp/coronavirus/a.html | cut -d "<" -f 2 | cut -d ">" -f2)
+        recovered_corona=$(grep -n -m 2 -E "<span>.*</span>$" /tmp/coronavirus/a.html | cut -d "<" -f 2 | cut -d ">" -f2 | awk '{if(NR==2) print $0}')
+        echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
+        echo " Result of Iran Country"
+        echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
+        echo ""
+        echo "[-] Number of Corona cases of Iran are: $corona_cases"
+        echo "[-] Number of Died cases of Iran are: $died_corona"
+        echo "[-] Number of Recovered cases of Iran are: $recovered_corona"
+        echo ""
+        rm -rf /tmp/coronavirus/
+        sleep 5
+        exit
+elif [ $country == "21" ]
+    then
+        echo ""
+        curl --silent "https://www.worldometers.info/coronavirus/country/belgium/" > /tmp/coronavirus/a.html
+        corona_cases=$(grep -E '<span style="color:#aaa">' /tmp/coronavirus/a.html | cut -d ">" -f 2 | cut -d "<" -f 1)
+        died_corona=$(grep -n -m 1 -E "<span>.*</span>$" /tmp/coronavirus/a.html | cut -d "<" -f 2 | cut -d ">" -f2)
+        recovered_corona=$(grep -n -m 2 -E "<span>.*</span>$" /tmp/coronavirus/a.html | cut -d "<" -f 2 | cut -d ">" -f2 | awk '{if(NR==2) print $0}')
+        echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
+        echo " Result of Belgium Country"
+        echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
+        echo ""
+        echo "[-] Number of Corona cases of Belgium are: $corona_cases"
+        echo "[-] Number of Died cases of Belgium are: $died_corona"
+        echo "[-] Number of Recovered cases of Belgium are: $recovered_corona"
+        echo ""
+        rm -rf /tmp/coronavirus/
+        sleep 5
+        exit
+elif [ $country == "22" ]
+    then
+        echo ""
+        curl --silent "https://www.worldometers.info/coronavirus/country/philippines/" > /tmp/coronavirus/a.html
+        corona_cases=$(grep -E '<span style="color:#aaa">' /tmp/coronavirus/a.html | cut -d ">" -f 2 | cut -d "<" -f 1)
+        died_corona=$(grep -n -m 1 -E "<span>.*</span>$" /tmp/coronavirus/a.html | cut -d "<" -f 2 | cut -d ">" -f2)
+        recovered_corona=$(grep -n -m 2 -E "<span>.*</span>$" /tmp/coronavirus/a.html | cut -d "<" -f 2 | cut -d ">" -f2 | awk '{if(NR==2) print $0}')
+        echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
+        echo " Result of Philippines Country"
+        echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
+        echo ""
+        echo "[-] Number of Corona cases of Philippines are: $corona_cases"
+        echo "[-] Number of Died cases of Philippines are: $died_corona"
+        echo "[-] Number of Recovered cases of Philippines are: $recovered_corona"
+        echo ""
+        rm -rf /tmp/coronavirus/
+        sleep 5
+        exit
+elif [ $country == "23" ]
+    then
+        echo ""
+        curl --silent "https://www.worldometers.info/coronavirus/country/china-hong-kong-sar/" > /tmp/coronavirus/a.html
+        corona_cases=$(grep -E '<span style="color:#aaa">' /tmp/coronavirus/a.html | cut -d ">" -f 2 | cut -d "<" -f 1)
+        died_corona=$(grep -n -m 1 -E "<span>.*</span>$" /tmp/coronavirus/a.html | cut -d "<" -f 2 | cut -d ">" -f2)
+        recovered_corona=$(grep -n -m 2 -E "<span>.*</span>$" /tmp/coronavirus/a.html | cut -d "<" -f 2 | cut -d ">" -f2 | awk '{if(NR==2) print $0}')
+        echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
+        echo " Result of Hong Kong Country"
+        echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
+        echo ""
+        echo "[-] Number of Corona cases of Hong Kong are: $corona_cases"
+        echo "[-] Number of Died cases of Hong Kong are: $died_corona"
+        echo "[-] Number of Recovered cases of Hong Kong are: $recovered_corona"
+        echo ""
+        rm -rf /tmp/coronavirus/
+        sleep 5
+        exit
+elif [ $country == "24" ]
+    then
+        echo ""
+        curl --silent "https://www.worldometers.info/coronavirus/country/iraq/" > /tmp/coronavirus/a.html
+        corona_cases=$(grep -E '<span style="color:#aaa">' /tmp/coronavirus/a.html | cut -d ">" -f 2 | cut -d "<" -f 1)
+        died_corona=$(grep -n -m 1 -E "<span>.*</span>$" /tmp/coronavirus/a.html | cut -d "<" -f 2 | cut -d ">" -f2)
+        recovered_corona=$(grep -n -m 2 -E "<span>.*</span>$" /tmp/coronavirus/a.html | cut -d "<" -f 2 | cut -d ">" -f2 | awk '{if(NR==2) print $0}')
+        echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
+        echo " Result of Iraq Country"
+        echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
+        echo ""
+        echo "[-] Number of Corona cases of Iraq are: $corona_cases"
+        echo "[-] Number of Died cases of Iraq are: $died_corona"
+        echo "[-] Number of Recovered cases of Iraq are: $recovered_corona"
+        echo ""
+        rm -rf /tmp/coronavirus/
+        sleep 5
+        exit
+elif [ $country == "25" ]
+    then
+        echo ""
+        curl --silent "https://www.worldometers.info/coronavirus/country/portugal/" > /tmp/coronavirus/a.html
+        corona_cases=$(grep -E '<span style="color:#aaa">' /tmp/coronavirus/a.html | cut -d ">" -f 2 | cut -d "<" -f 1)
+        died_corona=$(grep -n -m 1 -E "<span>.*</span>$" /tmp/coronavirus/a.html | cut -d "<" -f 2 | cut -d ">" -f2)
+        recovered_corona=$(grep -n -m 2 -E "<span>.*</span>$" /tmp/coronavirus/a.html | cut -d "<" -f 2 | cut -d ">" -f2 | awk '{if(NR==2) print $0}')
+        echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
+        echo " Result of Portugal Country"
+        echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
+        echo ""
+        echo "[-] Number of Corona cases of Portugal are: $corona_cases"
+        echo "[-] Number of Died cases of Portugal are: $died_corona"
+        echo "[-] Number of Recovered cases of Portugal are: $recovered_corona"
+        echo ""
+        rm -rf /tmp/coronavirus/
+        sleep 5
+        exit
+elif [ $country == "26" ]
+    then
+        echo ""
+        curl --silent "https://www.worldometers.info/coronavirus/country/austria/" > /tmp/coronavirus/a.html
+        corona_cases=$(grep -E '<span style="color:#aaa">' /tmp/coronavirus/a.html | cut -d ">" -f 2 | cut -d "<" -f 1)
+        died_corona=$(grep -n -m 1 -E "<span>.*</span>$" /tmp/coronavirus/a.html | cut -d "<" -f 2 | cut -d ">" -f2)
+        recovered_corona=$(grep -n -m 2 -E "<span>.*</span>$" /tmp/coronavirus/a.html | cut -d "<" -f 2 | cut -d ">" -f2 | awk '{if(NR==2) print $0}')
+        echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
+        echo " Result of Austria Country"
+        echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
+        echo ""
+        echo "[-] Number of Corona cases of Austria are: $corona_cases"
+        echo "[-] Number of Died cases of Austria are: $died_corona"
+        echo "[-] Number of Recovered cases of Austria are: $recovered_corona"
+        echo ""
+        rm -rf /tmp/coronavirus/
+        sleep 5
+        exit
+elif [ $country == "27" ]
+    then
+        echo ""
+        curl --silent "https://www.worldometers.info/coronavirus/country/norway/" > /tmp/coronavirus/a.html
+        corona_cases=$(grep -E '<span style="color:#aaa">' /tmp/coronavirus/a.html | cut -d ">" -f 2 | cut -d "<" -f 1)
+        died_corona=$(grep -n -m 1 -E "<span>.*</span>$" /tmp/coronavirus/a.html | cut -d "<" -f 2 | cut -d ">" -f2)
+        recovered_corona=$(grep -n -m 2 -E "<span>.*</span>$" /tmp/coronavirus/a.html | cut -d "<" -f 2 | cut -d ">" -f2 | awk '{if(NR==2) print $0}')
+        echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
+        echo " Result of Norway Country"
+        echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
+        echo ""
+        echo "[-] Number of Corona cases of Norway are: $corona_cases"
+        echo "[-] Number of Died cases of Norway are: $died_corona"
+        echo "[-] Number of Recovered cases of Norway are: $recovered_corona"
+        echo ""
+        rm -rf /tmp/coronavirus/
+        sleep 5
+        exit
+elif [ $country == "28" ]
+    then
+        echo ""
+        curl --silent "https://www.worldometers.info/coronavirus/country/france/" > /tmp/coronavirus/a.html
+        corona_cases=$(grep -E '<span style="color:#aaa">' /tmp/coronavirus/a.html | cut -d ">" -f 2 | cut -d "<" -f 1)
+        died_corona=$(grep -n -m 1 -E "<span>.*</span>$" /tmp/coronavirus/a.html | cut -d "<" -f 2 | cut -d ">" -f2)
+        recovered_corona=$(grep -n -m 2 -E "<span>.*</span>$" /tmp/coronavirus/a.html | cut -d "<" -f 2 | cut -d ">" -f2 | awk '{if(NR==2) print $0}')
+        echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
+        echo " Result of France Country"
+        echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
+        echo ""
+        echo "[-] Number of Corona cases of France are: $corona_cases"
+        echo "[-] Number of Died cases of France are: $died_corona"
+        echo "[-] Number of Recovered cases of France are: $recovered_corona"
+        echo ""
+        rm -rf /tmp/coronavirus/
+        sleep 5
+        exit
+elif [ $country == "29" ]
+    then
+        echo ""
+        curl --silent "https://www.worldometers.info/coronavirus/country/brazil/" > /tmp/coronavirus/a.html
+        corona_cases=$(grep -E '<span style="color:#aaa">' /tmp/coronavirus/a.html | cut -d ">" -f 2 | cut -d "<" -f 1)
+        died_corona=$(grep -n -m 1 -E "<span>.*</span>$" /tmp/coronavirus/a.html | cut -d "<" -f 2 | cut -d ">" -f2)
+        recovered_corona=$(grep -n -m 2 -E "<span>.*</span>$" /tmp/coronavirus/a.html | cut -d "<" -f 2 | cut -d ">" -f2 | awk '{if(NR==2) print $0}')
+        echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
+        echo " Result of Brazil Country"
+        echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
+        echo ""
+        echo "[-] Number of Corona cases of Brazil are: $corona_cases"
+        echo "[-] Number of Died cases of Brazil are: $died_corona"
+        echo "[-] Number of Recovered cases of Brazil are: $recovered_corona"
+        echo ""
+        rm -rf /tmp/coronavirus/
+        sleep 5
+        exit
+else
+    echo "[-] Wrong Selection. Exiting..."
+    sleep 2
+    exit
+fi
